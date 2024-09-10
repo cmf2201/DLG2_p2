@@ -21,7 +21,7 @@ import utils
 # Load the parameters
 from loadParam import *
 
-if os.path.exists(JOB_FOLDER):
+if os.path.exists('/'):
     shutil.rmtree(JOB_FOLDER)
     print(f"deleted previous job folder from {JOB_FOLDER}")
 os.mkdir(JOB_FOLDER)
@@ -33,7 +33,7 @@ device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 print('device', device)
 
 # Define the dataset size
-dataset = WindowDataset(DS_PATH)
+dataset = WindowDataset('/TransfordmedRenders')
 
 # Split the dataset into train and validation
 dataset_size = len(dataset)

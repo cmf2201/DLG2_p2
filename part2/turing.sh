@@ -1,11 +1,11 @@
 #!/bin/bash
 
-#SBATCH --mail-user=username@wpi.edu
+#SBATCH --mail-user=skushwaha@wpi.edu
 #SBATCH --mail-type=ALL
 
 #SBATCH -J window_seg
-#SBATCH --output=/home/username/logs/window_seg%j.out
-#SBATCH --error=/home/username/logs/window_seg%j.err
+#SBATCH --output=/home/skushwaha/logs/window_seg%j.out
+#SBATCH --error=/home/skushwaha/logs/window_seg%j.err
 
 #SBATCH -N 1
 #SBATCH -n 8
