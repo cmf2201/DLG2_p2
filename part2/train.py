@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import shutil
 from torch.utils.data import Subset
+from torchmetrics.classification import Dice
 
 import wandb
 
@@ -50,7 +51,7 @@ model = Network(3, 1)
 model = model.to(device)
 
 # LOSS FUNCTION AND OPTIMIZER
-optimizer = 
+optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4) # ADAM Optimizer again
 
 def shouldLog(batchcount=None):
     if batchcount==None:
@@ -159,7 +160,7 @@ torch.save(model.state_dict(), trainedMdlPath)
 # SCRIPT ---------------------------------------------------------------------------------
 epochs = 100
 
-lossFn = 
+lossFn = Dice(average='micro') # Dice Loss
 
 for eIndex in range(epochs):
     dp(f"Epoch {eIndex+1}\n")
