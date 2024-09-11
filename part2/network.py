@@ -2,8 +2,13 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torchvision.transforms import v2
 
 # found implementation of UNET here: https://medium.com/@alessandromondin/semantic-segmentation-with-pytorch-u-net-from-scratch-502d6565910a
+
+def center_crop(img, size):
+    center_cropper = v2.CenterCrop(size=size)
+    return center_cropper(img)
 
 class CNNBlock(nn.Module):
     def __init__(self,
