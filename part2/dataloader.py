@@ -11,6 +11,7 @@ class WindowDataset(Dataset):
     def __init__(self, ds_path):
         # init code
         print("dataset init")
+        self.img_dir = ds_path
         self.dataset = [] # FILL THIS IN using ds_path to get to the dataset (i just dont know the structure of what to pass in)
 
     def __len__(self):
