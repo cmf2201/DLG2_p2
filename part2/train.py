@@ -8,6 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import shutil
 from torch.utils.data import Subset
+import torch.optim as optim
 
 import wandb
 
@@ -50,7 +51,7 @@ model = Network(3, 1)
 model = model.to(device)
 
 # LOSS FUNCTION AND OPTIMIZER
-optimizer = 
+optimizer = optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
 
 def shouldLog(batchcount=None):
     if batchcount==None:
@@ -159,7 +160,7 @@ torch.save(model.state_dict(), trainedMdlPath)
 # SCRIPT ---------------------------------------------------------------------------------
 epochs = 100
 
-lossFn = 
+lossFn = nn.BCEWithLogitsLoss()
 
 for eIndex in range(epochs):
     dp(f"Epoch {eIndex+1}\n")

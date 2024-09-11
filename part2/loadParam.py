@@ -3,7 +3,7 @@ import os
 HOME_PATH   =   os.path.expanduser("~")
 JOB_ID      =   "run2"
 MODEL_NAME  =   "windowseg"
-DS_PATH     =   "/home/manoj/blender/flyingWindows/og/"
+DS_PATH     =   "/home/ksukriti08/anaconda3/DLG2_p2/TransformedRenders"
 OUT_PATH    =   "/home/window_output"
 
 JOB_FOLDER  =   os.path.join(OUT_PATH, JOB_ID)
