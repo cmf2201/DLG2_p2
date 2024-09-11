@@ -47,11 +47,11 @@ trainLoader = torch.utils.data.DataLoader(trainset, BATCH_SIZE, True, num_worker
 valLoader = torch.utils.data.DataLoader(valset, BATCH_SIZE, True, num_workers=NUM_WORKERS)
 
 # Network and optimzer --------------------------------------------------------------
-model = Network(3, 1)
+model = Network(3, 1, 1, 2)
 model = model.to(device)
 
 # LOSS FUNCTION AND OPTIMIZER
-optimizer = torch.optim.AdamW(model.parameters(), lr=1e-4) # ADAM Optimizer again
+optimizer = torch.optim.AdamW(model.parameters(), lr=LR) # ADAM Optimizer again
 
 def shouldLog(batchcount=None):
     if batchcount==None:
@@ -160,7 +160,7 @@ torch.save(model.state_dict(), trainedMdlPath)
 # SCRIPT ---------------------------------------------------------------------------------
 epochs = 100
 
-lossFn = Dice(average='micro') # Dice Loss
+lossFn = nn.BCELoss(reduction='mean')
 
 for eIndex in range(epochs):
     dp(f"Epoch {eIndex+1}\n")
