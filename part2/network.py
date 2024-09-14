@@ -6,8 +6,8 @@ from torchvision.transforms import v2
 
 # found implementation of UNET here: https://medium.com/@alessandromondin/semantic-segmentation-with-pytorch-u-net-from-scratch-502d6565910a
 
-def center_crop(img, size):
-    center_cropper = v2.CenterCrop(size=size)
+def center_crop(img, sizex, sizey):
+    center_cropper = v2.CenterCrop(size=(sizex, sizey))
     return center_cropper(img)
 
 class CNNBlock(nn.Module):
@@ -26,6 +26,7 @@ class CNNBlock(nn.Module):
         )
 
     def forward(self, x):
+        x = x.float()
         x = self.seq_block(x)
         return x
 
@@ -139,7 +140,7 @@ class Decoder(nn.Module):
         for layer in self.layers:
             if isinstance(layer, CNNBlocks):
                 # center_cropping the route tensor to make width and height match
-                routes_connection[-1] = center_crop(routes_connection[-1], x.shape[2])
+                routes_connection[-1] = center_crop(routes_connection[-1], x.shape[2],x.shape[3])
                 # concatenating tensors channel-wise
                 x = torch.cat([x, routes_connection.pop(-1)], dim=1)
                 x = layer(x)

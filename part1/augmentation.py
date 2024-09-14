@@ -88,7 +88,7 @@ for render_set in os.listdir('./Renders/BlenderRenders/'):
 if os.path.isdir('./Renders/TransformedRenders') : shutil.rmtree('./Renders/TransformedRenders')
 os.mkdir('./Renders/TransformedRenders')
 
-render_sets = render_sets[21:26] # SAFETY DONT RUN ON EVERYTHING
+# render_sets = render_sets[21:26] # SAFETY DONT RUN ON EVERYTHING
 # transform and make new spots
 for render_set in render_sets:
     render_folder_name = render_set.split("/")[-1]

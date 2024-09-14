@@ -8,7 +8,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import shutil
 from torch.utils.data import Subset
-from torchmetrics.classification import Dice
+# from torchmetrics.classification import Dice
 
 import wandb
 
@@ -158,7 +158,7 @@ trainedMdlPath = TRAINED_MDL_PATH + f"test.pth"
 torch.save(model.state_dict(), trainedMdlPath)
 
 # SCRIPT ---------------------------------------------------------------------------------
-epochs = 100
+epochs = 2
 
 lossFn = nn.BCELoss(reduction='mean')
 

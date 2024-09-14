@@ -8,11 +8,25 @@
 #SBATCH --error=/home/ctnguyen/logs/window_seg%j.err
 
 #SBATCH -N 1
-#SBATCH -n 8
-#SBATCH --mem=32G
+#SBATCH -n 16
+#SBATCH --mem=48G
 #SBATCH --gres=gpu:1
-#SBATCH -C H100|A100|V100
+#SBATCH -C A30
 #SBATCH -p academic
-#SBATCH -t 12:00:00
+#SBATCH -t 23:00:00
+
+module load miniconda3
+
+conda create --name "lab2"
+source activate
+conda activate lab2
+
+conda install pytorch::pytorch
+conda install pytorch::torchvision
+conda install conda-forge::wandb
+conda install numpy
+conda install matplotlib
+
+module load cuda
 
 python3 train.py

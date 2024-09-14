@@ -1,3 +1,9 @@
+Dataset/
+Renders/TransformedRenders/
+TransformedRenders/
+Renders.zip
+Labels.zip
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
