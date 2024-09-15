@@ -4,8 +4,8 @@
 #SBATCH --mail-type=ALL
 
 #SBATCH -J window_seg
-#SBATCH --output=C:\Logs\logs\window_seg%j.out
-#SBATCH --error=C:\Logs\window_seg%j.err
+#SBATCH --output=turing/window_seg%j.out
+#SBATCH --error=turing/window_seg%j.err
 
 #SBATCH -N 1
 #SBATCH -n 16

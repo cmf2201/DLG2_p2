@@ -10,7 +10,7 @@ import shutil
 from torch.utils.data import Subset
 # from torchmetrics.classification import Dice
 
-# import wandb
+import wandb
 
 # CUSTOM
 from network import *
@@ -34,6 +34,11 @@ if not os.path.exists(OUT_PATH):
 if os.path.exists(JOB_FOLDER):
     shutil.rmtree(JOB_FOLDER)
     print(f"Deleted previous job folder from {JOB_FOLDER}")
+
+if os.path.exists(TRAINED_MDL_PATH):
+    shutil.rmtree(TRAINED_MDL_PATH)
+    print(f"Deleted previous training folder from {TRAINED_MDL_PATH}")
+
 
 # Create necessary directories
 os.mkdir(JOB_FOLDER)
@@ -74,18 +79,18 @@ def shouldLog(batchcount=None):
         return batchcount%LOG_BATCH_INTERVAL == 0 and LOG_WANDB=='true'
 
 # # INIT LOGGER
-# wandb.init(
-#     project=MODEL_NAME,
-#     name=str(JOB_ID),
+wandb.init(
+    project=MODEL_NAME,
+    name=str(JOB_ID),
     
-#     # track hyperparameters and run metadata
-#     config={
-#     "JOB_ID":JOB_ID,
-#     "learning_rate": LR,
-#     "batchsize": BATCH_SIZE,
-#     "dataset": DS_PATH,
-#     }
-# )
+    # track hyperparameters and run metadata
+    config={
+    "JOB_ID":JOB_ID,
+    "learning_rate": LR,
+    "batchsize": BATCH_SIZE,
+    "dataset": DS_PATH,
+    }
+)
 
 #  TRAIN ----------------------------------------------------------------------------
 def train(dataloader, model, loss_fn, optimizer, epochstep):
@@ -108,28 +113,28 @@ def train(dataloader, model, loss_fn, optimizer, epochstep):
         
         epochloss += loss.item()
 
-    #     wandb.log({
-    #         "epochstep": epochstep,
-    #         "batch/loss/train": loss.item(),
-    #             })
+        wandb.log({
+            "epochstep": epochstep,
+            "batch/loss/train": loss.item(),
+                })
             
-    #     if batchcount == 0: # only for the first batch every epoch
-    #         wandb_images = []
-    #         for (pred_single, label_single, rgb_single) in zip(pred, label, rgb):
-    #             combined_image_np = CombineImages(pred_single, label_single, rgb_single)
+        if batchcount == 0: # only for the first batch every epoch
+            wandb_images = []
+            for (pred_single, label_single, rgb_single) in zip(pred, label, rgb):
+                combined_image_np = CombineImages(pred_single, label_single, rgb_single)
 
-    #             # Create wandb.Image object and append to the list
-    #             wandb_images.append(wandb.Image(combined_image_np))
+                # Create wandb.Image object and append to the list
+                wandb_images.append(wandb.Image(combined_image_np))
 
-    #         wandb.log(
-    #         {
-    #             "images/train": wandb_images,
-    #         })
+            wandb.log(
+            {
+                "images/train": wandb_images,
+            })
                     
-    # if shouldLog():
-    #     wandb.log({
-    #         "epoch/loss/train": epochloss,
-    #                 })
+    if shouldLog():
+        wandb.log({
+            "epoch/loss/train": epochloss,
+                    })
     
 # Define the val function
 def val(dataloader, model, loss_fn, epochstep):
@@ -151,24 +156,24 @@ def val(dataloader, model, loss_fn, epochstep):
 
             epochloss += loss.item()
         
-            # wandb.log({
-            #     "batch/loss/": loss.item(),
-            #         })
+            wandb.log({
+                "batch/loss/": loss.item(),
+                    })
             
-    #         if batchcount == 0: # only for the first batch every epoch
-    #             wandb_images = []
-    #             for (pred_single, label_single, rgb_single) in zip(pred, label, rgb):
-    #                 combined_image_np = CombineImages(pred_single, label_single, rgb_single)
-    #                 wandb_images.append(wandb.Image(combined_image_np))
+            if batchcount == 0: # only for the first batch every epoch
+                wandb_images = []
+                for (pred_single, label_single, rgb_single) in zip(pred, label, rgb):
+                    combined_image_np = CombineImages(pred_single, label_single, rgb_single)
+                    wandb_images.append(wandb.Image(combined_image_np))
 
-    #             wandb.log(
-    #             {
-    #                 "images/val": wandb_images,
-    #             })
+                wandb.log(
+                {
+                    "images/val": wandb_images,
+                })
             
-    # wandb.log({
-    #     "epoch/loss/val": epochloss,
-    #             })
+    wandb.log({
+        "epoch/loss/val": epochloss,
+                })
 
 # STORE ORIGINAL PARAMTERS
 trainedMdlPath = TRAINED_MDL_PATH + f"test.pth"
