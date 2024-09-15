@@ -16,6 +16,13 @@ plt.rcParams["savefig.bbox"] = 'tight'
 to_image = ToPILImage()
 torch.manual_seed(1)
 
+HOME_PATH = os.path.expanduser("~")
+DATASET = os.path.join(HOME_PATH, "window_detection", "DLG2_p2", "Dataset")
+LABELS_DATASET = os.path.join(DATASET, "Labels")
+RENDERS_DATASET = os.path.join(DATASET, "Renders")
+RENDERS = os.path.join(HOME_PATH, "window_detection", "DLG2_p2", "Renders")
+BLENDER_RENDERS = os.path.join(RENDERS, "BlenderRenders")
+TRANSFORM_RENDERS = os.path.join(RENDERS, "TransformRenders")
     ##                            ##
     ## FUNCTIONS FOR AUGMENTATION ##
     ##                            ##  
@@ -81,19 +88,19 @@ def random_augment(render):
 
 # Image augmentation to entire folder
 render_sets = []
-for render_set in os.listdir('./Renders/BlenderRenders/'):
-    render_sets.append('./Renders/BlenderRenders/' + render_set)
+for render_set in os.listdir(BLENDER_RENDERS):
+    render_sets.append(BLENDER_RENDERS + render_set)
 
 # Clear old and make new folder for transformed renders
-if os.path.isdir('./Renders/TransformedRenders') : shutil.rmtree('./Renders/TransformedRenders')
-os.mkdir('./Renders/TransformedRenders')
+if os.path.isdir(TRANSFORM_RENDERS) : shutil.rmtree(TRANSFORM_RENDERS)
+os.mkdir(TRANSFORM_RENDERS)
 
 # render_sets = render_sets[21:26] # SAFETY DONT RUN ON EVERYTHING
 # transform and make new spots
 for render_set in render_sets:
     render_folder_name = render_set.split("/")[-1]
     for x in range(7): # 7
-        os.mkdir('./Renders/TransformedRenders/' + render_folder_name +  "t" + str(x))
+        os.mkdir(TRANSFORM_RENDERS + render_folder_name +  "t" + str(x))
         render = read_image(str(Path(render_set) / 'render.jpg'))
         alpha = read_image(str(Path(render_set) / 'alpha_0000_0000.png'))
         
@@ -104,21 +111,21 @@ for render_set in render_sets:
         image_render.convert('RGB')
         image_alpha.convert('L')
 
-        render_path = "./Renders/TransformedRenders/" + render_folder_name + "t" + str(x) + '/' +  os.path.basename('render.jpg')
-        alpha_path = "./Renders/TransformedRenders/" + render_folder_name + "t" + str(x) + '/' + os.path.basename('alpha_0000_0000.png')
+        render_path = TRANSFORM_RENDERS + render_folder_name + "t" + str(x) + '/' +  os.path.basename('render.jpg')
+        alpha_path = TRANSFORM_RENDERS + render_folder_name + "t" + str(x) + '/' + os.path.basename('alpha_0000_0000.png')
 
         image_render.save(render_path)
         image_alpha.save(alpha_path)
 
 transformed_render_sets = []
-for transformed_render_set in os.listdir('./Renders/TransformedRenders/'):
-    transformed_render_sets.append('./Renders/TransformedRenders/' + transformed_render_set)
+for transformed_render_set in os.listdir(TRANSFORM_RENDERS):
+    transformed_render_sets.append(TRANSFORM_RENDERS + transformed_render_set)
 
 all_render_sets = transformed_render_sets + render_sets
-if os.path.isdir('./Dataset/') : shutil.rmtree('./Dataset/')
-os.mkdir('./Dataset/')
-os.mkdir('./Dataset/Renders/')
-os.mkdir('./Dataset/Labels/')
+if os.path.isdir(DATASET) : shutil.rmtree(DATASET)
+os.mkdir(DATASET)
+os.mkdir(RENDERS_DATASET)
+os.mkdir(LABELS_DATASET)
 
 image_index = -1
 for render_set_index in range(len(all_render_sets)):
@@ -131,8 +138,8 @@ for render_set_index in range(len(all_render_sets)):
     image_alpha = to_image(alpha)
     image_render.convert('RGB')
     image_alpha.convert('L')
-    render_path = "./Dataset/Renders/" + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
-    alpha_path = "./Dataset/Labels/" + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+    render_path = RENDERS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+    alpha_path = LABELS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
     image_render.save(render_path)
     image_alpha.save(alpha_path)
 
@@ -156,8 +163,8 @@ for render_set_index in range(len(all_render_sets)):
         image_aug_render.convert('RGB')
         image_aug_alpha = image_alpha
         
-        render_aug_path = "./Dataset/Renders/" + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
-        alpha_aug_path = "./Dataset/Labels/" + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+        render_aug_path = RENDERS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+        alpha_aug_path = LABELS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
         image_aug_render.save(render_aug_path)
         image_aug_alpha.save(alpha_aug_path)
 
