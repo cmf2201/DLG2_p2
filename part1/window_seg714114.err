@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "/home/skushwaha/window_detection/DLG2_p2/part1/augmentation.py", line 84, in <module>
+    for render_set in os.listdir('./Renders/BlenderRenders/'):
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: './Renders/BlenderRenders/'
