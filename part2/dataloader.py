@@ -3,6 +3,7 @@ from torch.utils.data import Dataset, DataLoader
 from torchvision import transforms
 from torchvision.io import read_image
 from PIL import Image
+import numpy as np
 from pathlib import Path
 import os
 import glob
@@ -34,6 +35,9 @@ class WindowDataset(Dataset):
 
         rgb = read_image(str(Path(render)))
         label = read_image(str(Path(alpha)))
+
+        np.pad(rgb, pad_width=(196,188), mode='reflect').astype(np.float32)
+        np.pad(label, pad_width=(196,188), mode='reflect').astype(np.float32)
 
         # apply any transform (blur, noise...)
         

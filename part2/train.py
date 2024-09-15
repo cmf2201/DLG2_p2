@@ -47,7 +47,7 @@ trainLoader = torch.utils.data.DataLoader(trainset, BATCH_SIZE, True, num_worker
 valLoader = torch.utils.data.DataLoader(valset, BATCH_SIZE, True, num_workers=NUM_WORKERS)
 
 # Network and optimzer --------------------------------------------------------------
-model = Network(3, 64, 2, 4)
+model = Network(3, 64, 1, 4)
 model = model.to(device)
 
 # LOSS FUNCTION AND OPTIMIZER
@@ -158,7 +158,7 @@ trainedMdlPath = TRAINED_MDL_PATH + f"test.pth"
 torch.save(model.state_dict(), trainedMdlPath)
 
 # SCRIPT ---------------------------------------------------------------------------------
-epochs = 2
+epochs = 1
 
 lossFn = nn.BCELoss(reduction='mean')
 
