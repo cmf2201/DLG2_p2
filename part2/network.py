@@ -2,6 +2,8 @@ import torch
 import torch.nn as nn
 import torchvision.transforms.functional as TF
 
+# found implementation of UNET here: https://medium.com/@alessandromondin/semantic-segmentation-with-pytorch-u-net-from-scratch-502d6565910a
+
 class DoubleConv(nn.Module):
     def __init__(self, in_channels, out_channels):
         super(DoubleConv, self).__init__()

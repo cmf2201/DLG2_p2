@@ -38,7 +38,8 @@ class WindowDataset(Dataset):
 
         rgb = np.pad(rgb, ((0,0), (196,188), (196, 188)), mode='reflect').astype(np.float32)
         label = np.pad(label, ((0,0), (196, 188), (196, 188)), mode='reflect').astype(np.float32)
-
+        label = label / 255
+        rgb = rgb / 255
         # apply any transform (blur, noise...)
         
         return rgb, label

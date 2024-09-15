@@ -67,6 +67,7 @@ valLoader = torch.utils.data.DataLoader(valset, BATCH_SIZE, True, num_workers=NU
 
 # Network and optimzer --------------------------------------------------------------
 model = UNET()
+model = nn.DataParallel(model) # runs on parallel gpus?
 model = model.to(device)
 
 # LOSS FUNCTION AND OPTIMIZER
@@ -149,9 +150,9 @@ def val(dataloader, model, loss_fn, epochstep):
             label = label.to(device)
             
             pred = model(rgb)
-            print("Shapes: ")
-            print(pred.shape)   
-            print(label.shape)  
+            # print("Shapes: ")
+            # print(pred.shape)   
+            # print(label.shape)  
             loss = loss_fn(pred, label)  
 
             epochloss += loss.item()
@@ -180,7 +181,7 @@ trainedMdlPath = TRAINED_MDL_PATH + f"test.pth"
 torch.save(model.state_dict(), trainedMdlPath)
 
 # SCRIPT ---------------------------------------------------------------------------------
-epochs = 2
+epochs = 15
 
 lossFn = nn.BCEWithLogitsLoss()
 

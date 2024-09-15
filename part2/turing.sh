@@ -7,10 +7,10 @@
 #SBATCH --output=turing/window_seg%j.out
 #SBATCH --error=turing/window_seg%j.err
 
-#SBATCH -N 1
+#SBATCH -N 3
 #SBATCH -n 16
-#SBATCH --mem=48G
-#SBATCH --gres=gpu:1
+#SBATCH --mem=64G
+#SBATCH --gres=gpu:3
 #SBATCH -C A30
 #SBATCH -p academic
 #SBATCH -t 23:00:00
@@ -19,7 +19,7 @@ module load miniconda3
 
 # conda create --name "lab2"
 source activate
-conda activate lab2
+conda activate project2
 
 # conda install pytorch::pytorch
 # conda install pytorch::torchvision
