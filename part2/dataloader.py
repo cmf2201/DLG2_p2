@@ -9,6 +9,7 @@ import glob
 # from dataaug import *
 from loadParam import *
 import pdb
+import numpy as np
 
 class WindowDataset(Dataset):
     def __init__(self, ds_path):
@@ -34,6 +35,9 @@ class WindowDataset(Dataset):
 
         rgb = read_image(str(Path(render)))
         label = read_image(str(Path(alpha)))
+
+        rgb = np.pad(rgb, pad_width=(196,188), mode='reflect').astype(np.float32)
+        label = np.pad(label, pad_width=(196,188), mode='reflect').astype(np.float32)
 
         # apply any transform (blur, noise...)
         

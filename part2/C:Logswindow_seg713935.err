@@ -1,0 +1,7 @@
+Loading cuda/12.5.1/6wffrw2
+  Loading requirement: libiconv/1.17/pmxhi4x xz/5.4.6/uxouxrg
+    zlib-ng/2.1.5/uctcqfl libxml2/2.10.3/vdqe2g3
+Traceback (most recent call last):
+  File "/home/skushwaha/window_detection/DLG2_p2/part2/train.py", line 40, in <module>
+    os.mkdir(TRAINED_MDL_PATH)
+FileExistsError: [Errno 17] File exists: '/home/skushwaha/window_detection/DLG2_p2/Outputs/trained_model'

@@ -1,0 +1,67 @@
+Loading cuda/12.5.1/6wffrw2
+  Loading requirement: libiconv/1.17/pmxhi4x xz/5.4.6/uxouxrg
+    zlib-ng/2.1.5/uctcqfl libxml2/2.10.3/vdqe2g3
+Traceback (most recent call last):
+  File "/home/skushwaha/window_detection/DLG2_p2/part2/train.py", line 185, in <module>
+    train(trainLoader, model, lossFn, optimizer, eIndex)
+  File "/home/skushwaha/window_detection/DLG2_p2/part2/train.py", line 104, in train
+    pred = model(rgb)
+           ^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/window_detection/DLG2_p2/part2/network.py", line 167, in forward
+    enc_out, routes = self.encoder(x)
+                      ^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/window_detection/DLG2_p2/part2/network.py", line 93, in forward
+    x = layer(x)
+        ^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/window_detection/DLG2_p2/part2/network.py", line 57, in forward
+    x = layer(x)
+        ^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/window_detection/DLG2_p2/part2/network.py", line 30, in forward
+    x = self.seq_block(x)
+        ^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/container.py", line 219, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1553, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1562, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 458, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/skushwaha/.conda/envs/lab2/lib/python3.12/site-packages/torch/nn/modules/conv.py", line 454, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Given groups=1, weight of size [64, 3, 3, 3], expected input[1, 387, 1464, 2304] to have 3 channels, but got 387 channels instead
