@@ -36,8 +36,8 @@ class WindowDataset(Dataset):
         rgb = read_image(str(Path(render)))
         label = read_image(str(Path(alpha)))
 
-        rgb = np.pad(rgb, pad_width=(196,188), mode='reflect').astype(np.float32)
-        label = np.pad(label, pad_width=(196,188), mode='reflect').astype(np.float32)
+        rgb = np.pad(rgb, ((0,0), (196,188), (196, 188)), mode='reflect').astype(np.float32)
+        label = np.pad(label, ((0,0), (196, 188), (196, 188)), mode='reflect').astype(np.float32)
 
         # apply any transform (blur, noise...)
         

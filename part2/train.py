@@ -61,7 +61,7 @@ trainLoader = torch.utils.data.DataLoader(trainset, BATCH_SIZE, True, num_worker
 valLoader = torch.utils.data.DataLoader(valset, BATCH_SIZE, True, num_workers=NUM_WORKERS)
 
 # Network and optimzer --------------------------------------------------------------
-model = Network(3, 64, 1, 4)
+model = UNET()
 model = model.to(device)
 
 # LOSS FUNCTION AND OPTIMIZER
