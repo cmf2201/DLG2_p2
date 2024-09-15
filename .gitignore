@@ -1,5 +1,6 @@
 Dataset/
 Renders/TransformedRenders/
+Outputs/
 TransformedRenders/
 Renders.zip
 Labels.zip
