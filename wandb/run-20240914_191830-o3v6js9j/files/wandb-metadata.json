@@ -1,0 +1,32 @@
+{
+  "os":  "Linux-5.15.0-119-generic-x86_64-with-glibc2.31",
+  "python":  "3.12.5",
+  "startedAt":  "2024-09-14T23:18:30.299341Z",
+  "program":  "/home/caleb/Documents/WPI/24_25/DeepLearning/HW2/Group2_p2/part2/train.py",
+  "codePath":  "part2/train.py",
+  "git":  {
+    "remote":  "git@github.com:cmf2201/DLG2_p2.git",
+    "commit":  "eee7ae1800ce57ed2ee3a7a4a3f459d272990d45"
+  },
+  "email":  "cmfrench808@gmail.com",
+  "root":  "/home/caleb/Documents/WPI/24_25/DeepLearning/HW2/Group2_p2",
+  "host":  "caleb-ROG-Zephyrus-G14-GA401IV-GA401IV",
+  "username":  "caleb",
+  "executable":  "/home/caleb/anaconda3/envs/RBE474Xp2/bin/python",
+  "codePathLocal":  "part2/train.py",
+  "cpu_count":  8,
+  "cpu_count_logical":  16,
+  "disk":  {
+    "/":  {
+      "total":  "74257072128",
+      "used":  "65460973568"
+    }
+  },
+  "memory":  {
+    "total":  "16148160512"
+  },
+  "cpu":  {
+    "count":  8,
+    "countLogical":  16
+  }
+}
