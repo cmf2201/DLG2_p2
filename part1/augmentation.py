@@ -89,7 +89,7 @@ def random_augment(render):
 # Image augmentation to entire folder
 render_sets = []
 for render_set in os.listdir(BLENDER_RENDERS):
-    render_sets.append(BLENDER_RENDERS + render_set)
+    render_sets.append(BLENDER_RENDERS + '/' + render_set)
 
 # Clear old and make new folder for transformed renders
 if os.path.isdir(TRANSFORM_RENDERS) : shutil.rmtree(TRANSFORM_RENDERS)
@@ -100,7 +100,7 @@ os.mkdir(TRANSFORM_RENDERS)
 for render_set in render_sets:
     render_folder_name = render_set.split("/")[-1]
     for x in range(7): # 7
-        os.mkdir(TRANSFORM_RENDERS + render_folder_name +  "t" + str(x))
+        os.mkdir(TRANSFORM_RENDERS + '/' + render_folder_name +  "t" + str(x))
         render = read_image(str(Path(render_set) / 'render.jpg'))
         alpha = read_image(str(Path(render_set) / 'alpha_0000_0000.png'))
         
@@ -111,15 +111,15 @@ for render_set in render_sets:
         image_render.convert('RGB')
         image_alpha.convert('L')
 
-        render_path = TRANSFORM_RENDERS + render_folder_name + "t" + str(x) + '/' +  os.path.basename('render.jpg')
-        alpha_path = TRANSFORM_RENDERS + render_folder_name + "t" + str(x) + '/' + os.path.basename('alpha_0000_0000.png')
+        render_path = TRANSFORM_RENDERS + '/' + render_folder_name + "t" + str(x) + '/' +  os.path.basename('render.jpg')
+        alpha_path = TRANSFORM_RENDERS + '/' + render_folder_name + "t" + str(x) + '/' + os.path.basename('alpha_0000_0000.png')
 
         image_render.save(render_path)
         image_alpha.save(alpha_path)
 
 transformed_render_sets = []
 for transformed_render_set in os.listdir(TRANSFORM_RENDERS):
-    transformed_render_sets.append(TRANSFORM_RENDERS + transformed_render_set)
+    transformed_render_sets.append(TRANSFORM_RENDERS + '/' + transformed_render_set)
 
 all_render_sets = transformed_render_sets + render_sets
 if os.path.isdir(DATASET) : shutil.rmtree(DATASET)
@@ -138,8 +138,8 @@ for render_set_index in range(len(all_render_sets)):
     image_alpha = to_image(alpha)
     image_render.convert('RGB')
     image_alpha.convert('L')
-    render_path = RENDERS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
-    alpha_path = LABELS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+    render_path = RENDERS_DATASET + '/' + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+    alpha_path = LABELS_DATASET + '/' + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
     image_render.save(render_path)
     image_alpha.save(alpha_path)
 
@@ -163,47 +163,7 @@ for render_set_index in range(len(all_render_sets)):
         image_aug_render.convert('RGB')
         image_aug_alpha = image_alpha
         
-        render_aug_path = RENDERS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
-        alpha_aug_path = LABELS_DATASET + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+        render_aug_path = RENDERS_DATASET + '/' + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
+        alpha_aug_path = LABELS_DATASET + '/' + os.path.basename('0' * (5 - len(image_index_string)) + image_index_string + '.jpg')
         image_aug_render.save(render_aug_path)
         image_aug_alpha.save(alpha_aug_path)
-
-
-# for render_set in all_render_sets:
-#     render_folder_name = render_set.split("/")[-1]
-#     os.mkdir('./Renders/AllRenders/' + render_folder_name)
-
-#     # Bring over old render and alpha
-#     render = read_image(str(Path(render_set) / 'render.jpg'))
-#     alpha = read_image(str(Path(render_set) / 'alpha_0000_0000.png'))
-#     image_render = to_image(render)
-#     image_alpha = to_image(alpha)
-#     image_render.convert('RGB')
-#     image_alpha.convert('L')
-#     render_path = "./Renders/AllRenders/" + render_folder_name + '/' + os.path.basename('render.png')
-#     alpha_path = "./Renders/AllRenders/" + render_folder_name + '/' + os.path.basename('alpha_0000_0000.png')
-#     image_render.save(render_path)
-#     image_alpha.save(alpha_path)
-
-#     for x in range(15): # 15
-#         render = read_image(str(Path(render_set) / 'render.jpg'))
-#         new_render = render
-
-#         # LOGIC THAT AUGMENTS A PHOTO RANDOMLY
-#         prob_multiple_augments = random.random()
-#         if prob_multiple_augments < 0.45:
-#             new_render = random_augment(render)
-#         elif prob_multiple_augments < 0.8:
-#             new_render = random_augment(render)
-#             new_render = random_augment(new_render)
-#         else:
-#             new_render = random_augment(render)
-#             new_render = random_augment(new_render)
-#             new_render = random_augment(new_render)
-        
-#         # Save augmented render
-#         aug_render = new_render
-#         image_render = to_image(aug_render)
-#         image_render.convert('RGB')
-#         render_path = "./Renders/AllRenders/" + render_folder_name + '/' + os.path.basename('render' + str(x)+ '.jpg')
-#         image_render.save(render_path)
