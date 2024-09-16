@@ -9,7 +9,7 @@
 
 #SBATCH -N 3
 #SBATCH -n 16
-#SBATCH --mem=64G
+#SBATCH --mem=120G
 #SBATCH --gres=gpu:3
 #SBATCH -C A30
 #SBATCH -p academic

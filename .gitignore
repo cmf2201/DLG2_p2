@@ -4,7 +4,10 @@ Outputs/
 TransformedRenders/
 Renders.zip
 Labels.zip
-
+Renders/
+wandb/
+*.err
+*.out
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

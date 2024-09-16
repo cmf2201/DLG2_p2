@@ -49,7 +49,8 @@ print(f"Trained model path created at: {TRAINED_MDL_PATH}")
 
 # DATASET ---------------------------------------------------------------------------
 datatype = torch.float32
-device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
+device = torch.device('cuda:0' if torch.cuda.is_available() else 'cuda:2')
+device2 = torch.device('cuda:1' if torch.cuda.is_available() else 'cuda:2')
 print('device', device)
 
 # Define the dataset size
@@ -181,7 +182,7 @@ trainedMdlPath = TRAINED_MDL_PATH + f"test.pth"
 torch.save(model.state_dict(), trainedMdlPath)
 
 # SCRIPT ---------------------------------------------------------------------------------
-epochs = 15
+epochs = 20
 
 lossFn = nn.BCEWithLogitsLoss()
 
