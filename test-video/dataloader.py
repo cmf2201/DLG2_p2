@@ -14,7 +14,7 @@ import numpy as np
 
 class VideoDataset(Dataset):
     def __init__(self, ds_path):
-        self.frames = glob.glob(ds_path + '/test-video/*.jpg') # render folder path in relation to dataset path
+        self.frames = glob.glob(ds_path + '*.jpg') # render folder path in relation to dataset path
         self.frames.sort(key=str.lower)
 
     def __len__(self):

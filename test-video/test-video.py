@@ -21,31 +21,10 @@ from dataloader import *
 from loadParam import *
 torch.cuda.empty_cache()
 
-JOB_FOLDER = os.path.join(VIDEO_PATH, JOB_ID)
-TRAINED_MDL_PATH = os.path.join(VIDEO_PATH, "trained_model")
-
-# Ensure Outputs directory exists
-if not os.path.exists(VIDEO_PATH):
-    os.mkdir(VIDEO_PATH)
-
-# Handle previous job folders if they exist
-if os.path.exists(JOB_FOLDER):
-    shutil.rmtree(JOB_FOLDER)
-    print(f"Deleted previous job folder from {JOB_FOLDER}")
-
-if os.path.exists(TRAINED_MDL_PATH):
-    shutil.rmtree(TRAINED_MDL_PATH)
-    print(f"Deleted previous training folder from {TRAINED_MDL_PATH}")
-
-
-# Create necessary directories
-os.mkdir(JOB_FOLDER)
-os.mkdir(TRAINED_MDL_PATH)
-
 datatype = torch.float32
 device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
-dataset = VideoDataset(VIDEO_PATH)
+dataset = VideoDataset("./")
 
 model = UNET().to("cpu")
 model.load_state_dict(torch.load("trained_model8.pth", map_location=torch.device('cpu')))
